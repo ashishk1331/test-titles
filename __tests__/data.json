@@ -1,0 +1,151 @@
+[
+	{
+		"id": 1,
+		"input": "#p: Select Paragraph Tag",
+		"output": [
+			"                   p: Select Paragraph Tag                                          "
+		]
+	},
+	{
+		"id": 2,
+		"input": "#p: Update Paragraph Text",
+		"output": [
+			"                   p: Update Paragraph Text                                         "
+		]
+	},
+	{
+		"id": 3,
+		"input": ".attr #p: Retrieve id of paragraph",
+		"output": [
+			"attr               p: Retrieve id of paragraph                                      "
+		]
+	},
+	{
+		"id": 4,
+		"input": ".attr #p: Update id of paragraph",
+		"output": [
+			"attr               p: Update id of paragraph                                        "
+		]
+	},
+	{
+		"id": 5,
+		"input": ".removeAttr #p: Remove id from paragraph",
+		"output": [
+			"removeAttr         p: Remove id from paragraph                                      "
+		]
+	},
+	{
+		"id": 6,
+		"input": ".removeAttr #p: Remove multiple attributes from paragraph",
+		"output": [
+			"removeAttr         p: Remove multiple attributes from paragraph                     "
+		]
+	},
+	{
+		"id": 7,
+		"input": ".removeAttr #p: Remove multiple attributes from paragraph ensuring the safety of the tag",
+		"output": [
+			"removeAttr         p: Remove multiple attributes from paragraph ensuring            ",
+			"                       the safety of the tag                                        "
+		]
+	},
+	{
+		"id": 8,
+		"input": ".addClass #p: Add class to paragraph",
+		"output": [
+			"addClass           p: Add class to paragraph                                        "
+		]
+	},
+	{
+		"id": 9,
+		"input": ".removeClass #p: Remove class of paragraph",
+		"output": [
+			"removeClas         p: Remove class of paragraph                                     ",
+			"s                                                                                   "
+		]
+	},
+	{
+		"id": 10,
+		"input": ".css #p: Get a specific style property of paragraph",
+		"output": [
+			"css                p: Get a specific style property of paragraph                    "
+		]
+	},
+	{
+		"id": 11,
+		"input": ".css #p: Set a specific style property of paragraph",
+		"output": [
+			"css                p: Set a specific style property of paragraph                    "
+		]
+	},
+	{
+		"id": 12,
+		"input": ".css #p: Set multiple style property of paragraph",
+		"output": [
+			"css                p: Set multiple style property of paragraph                      "
+		]
+	},
+	{
+		"id": 13,
+		"input": ".find #p: Find 'emphasis' tag inside paragraph",
+		"output": [
+			"find               p: Find 'emphasis' tag inside paragraph                          "
+		]
+	},
+	{
+		"id": 14,
+		"input": ".parent #em: Find parent of emphasis",
+		"output": [
+			"parent            em: Find parent of emphasis                                       "
+		]
+	},
+	{
+		"id": 15,
+		"input": "#li: Select List Tag",
+		"output": [
+			"                  li: Select List Tag                                               "
+		]
+	},
+	{
+		"id": 16,
+		"input": "#li: Select First(1) List Tag",
+		"output": [
+			"                  li: Select First(1) List Tag                                      "
+		]
+	},
+	{
+		"id": 17,
+		"input": "#li: Select Last(1) List Tag",
+		"output": [
+			"                  li: Select Last(1) List Tag                                       "
+		]
+	},
+	{
+		"id": 18,
+		"input": ".text #li: Retrieving text of all Lis",
+		"output": [
+			"text              li: Retrieving text of all Lis                                    "
+		]
+	},
+	{
+		"id": 19,
+		"input": ".text #li: Update text of all Lis",
+		"output": [
+			"text              li: Update text of all Lis                                        "
+		]
+	},
+	{
+		"id": 20,
+		"input": ".html #li: Retrieving innerHTML of first li *only",
+		"output": [
+			"html              li: Retrieving innerHTML of first li                   only       "
+		]
+	},
+	{
+		"id": 21,
+		"input": ".html #li: Update innerHTML of first li *only",
+		"output": [
+			"html              li: Update innerHTML of first li                       only       "
+		]
+	}
+]
