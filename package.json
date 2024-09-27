@@ -1,5 +1,5 @@
 {
-  "name": "test-titles",
+  "name": "@hugekontrast/test-titles",
   "version": "0.1.0",
   "description": "Generate semantic titles for test cases.",
   "homepage": "https://github.com/yourusername/test-titles#readme",
