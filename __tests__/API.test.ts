@@ -10,6 +10,7 @@ const smapleTitle =
 
 test("Test title should always span only 80 characters", () => {
   const title = t(smapleTitle, config);
-  console.log(title);
-  expect(title.split("\n")[0].length).toBe(80);
+  for (const eachLine of title.split("\n")) {
+    expect(eachLine.length).toBe(80);
+  }
 });

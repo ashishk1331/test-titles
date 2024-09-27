@@ -6,7 +6,7 @@ import chalk from "chalk";
 // * args 	red 		modifier
 
 type TitleConfig = {
-	colored: boolean;
+  colored: boolean;
 };
 
 type Elements = "meta" | "topic" | "title" | "args";
@@ -14,165 +14,165 @@ type Elements = "meta" | "topic" | "title" | "args";
 type ParsedObj = Record<Elements, string[]>;
 
 class Title {
-	config: TitleConfig = {
-		colored: true,
-	};
-	_obj: ParsedObj;
+  config: TitleConfig = {
+    colored: true,
+  };
+  _obj: ParsedObj;
 
-	constructor(title: string) {
-		this._obj = this.parseString(title);
-	}
+  constructor(title: string) {
+    this._obj = this.parseString(title);
+  }
 
-	/**
-	 * The function accepts string and outputs {}.
-	 * */
-	parseString(string: string): ParsedObj {
-		const C: ParsedObj = {
-			meta: [],
-			topic: [],
-			title: [],
-			args: [],
-		};
+  /**
+   * The function accepts string and outputs {}.
+   * */
+  parseString(string: string): ParsedObj {
+    const C: ParsedObj = {
+      meta: [],
+      topic: [],
+      title: [],
+      args: [],
+    };
 
-		if (typeof string !== "string") return C;
+    if (typeof string !== "string" || string.length < 1) return C;
 
-		for (let token of string.split(" ")) {
-			const shavedToken = token.substring(1);
-			// classifier
-			if (token.startsWith(".")) {
-				C.meta.push(shavedToken);
+    for (const token of string.split(" ")) {
+      const shavedToken = token.substring(1);
+      // classifier
+      if (token.startsWith(".")) {
+        C.meta.push(shavedToken);
 
-				// identifier
-			} else if (token.startsWith("#")) {
-				C.topic.push(shavedToken);
+        // identifier
+      } else if (token.startsWith("#")) {
+        C.topic.push(shavedToken);
 
-				// modifier
-			} else if (token.startsWith("*")) {
-				C.args.push(shavedToken);
+        // modifier
+      } else if (token.startsWith("*")) {
+        C.args.push(shavedToken);
 
-				// title text
-			} else {
-				C.title.push(token);
-			}
-		}
+        // title text
+      } else {
+        C.title.push(token);
+      }
+    }
 
-		return C;
-	}
+    return C;
+  }
 
-	wrap(text: string | string[], width: number) {
-		if (Array.isArray(text)) {
-			text = text.join(" ");
-		}
+  wrap(text: string | string[], width: number) {
+    if (Array.isArray(text)) {
+      text = text.join(" ");
+    }
 
-		let _resultant: string[] = [];
-		while (text.length > width) {
-			_resultant.push(text.substring(0, width).trim());
-			text = text.substring(width);
-		}
-		if (text.length > 0) {
-			_resultant.push(text.trim());
-		}
-		return _resultant;
-	}
+    const _resultant: string[] = [];
+    while (text.length > width) {
+      _resultant.push(text.substring(0, width).trim());
+      text = text.substring(width);
+    }
+    if (text.length > 0) {
+      _resultant.push(text.trim());
+    }
+    return _resultant;
+  }
 
-	zfill(text: string, width: number, direction: boolean = true) {
-		while (text.length < width) {
-			if (direction) {
-				text += " ";
-			} else {
-				text = " " + text;
-			}
-		}
-		return text;
-	}
+  zfill(text: string, width: number, direction: boolean = true) {
+    while (text.length < width) {
+      if (direction) {
+        text += " ";
+      } else {
+        text = " " + text;
+      }
+    }
+    return text;
+  }
 
-	updateConfig(userConfig: Partial<TitleConfig>) {
-		let config = Object.create(this.config);
-		for (let key in userConfig) {
-			if (key in config) {
-				config[key] = userConfig[key];
-			}
-		}
-		return config;
-	}
+  updateConfig(userConfig: Partial<TitleConfig>) {
+    const config = Object.create(this.config);
+    for (const key in userConfig) {
+      if (key in config) {
+        config[key] = userConfig[key];
+      }
+    }
+    return config;
+  }
 
-	/**
-	 * 	Function converts the captured data into a well parsed string.
-	 * */
-	generate(userConfig: Partial<TitleConfig>) {
-		const config = this.updateConfig(userConfig);
-		const { meta, topic, title, args } = this._obj;
-		let _resultant: ParsedObj = {
-			meta: [],
-			topic: [],
-			title: [],
-			args: [],
-		};
-		const widths = {
-			meta: 10, // 10 - 1 (space delimiter))
-			topic: 10, // 10 - 1 (space delimiter))
-			title: 50,
-			args: 10, // 10 - 1 (space delimiter))
-		};
-		const color = {
-			meta: chalk.yellow,
-			topic: chalk.magenta,
-			title: chalk.white,
-			args: chalk.red,
-		};
+  /**
+   * 	Function converts the captured data into a well parsed string.
+   * */
+  generate(userConfig: Partial<TitleConfig>) {
+    const config = this.updateConfig(userConfig);
+    const { meta, topic, title, args } = this._obj;
+    const _resultant: ParsedObj = {
+      meta: [],
+      topic: [],
+      title: [],
+      args: [],
+    };
+    const widths = {
+      meta: 10, // 10 - 1 (space delimiter))
+      topic: 10, // 10 - 1 (space delimiter))
+      title: 50,
+      args: 10, // 10 - 1 (space delimiter))
+    };
+    const color = {
+      meta: chalk.yellow,
+      topic: chalk.magenta,
+      title: chalk.white,
+      args: chalk.red,
+    };
 
-		// console.log(this._obj);
+    // console.log(this._obj);
 
-		if (meta && meta.length > 0) {
-			_resultant.meta = this.wrap(meta.join(", "), widths.meta - 1);
-		}
+    if (meta && meta.length > 0) {
+      _resultant.meta = this.wrap(meta.join(", "), widths.meta - 1);
+    }
 
-		if (topic && topic.length > 0) {
-			_resultant.topic = this.wrap(topic, widths.topic - 1);
-		}
+    if (topic && topic.length > 0) {
+      _resultant.topic = this.wrap(topic, widths.topic - 1);
+    }
 
-		if (title && title.length > 0) {
-			_resultant.title = this.wrap(title, widths.title);
-		}
+    if (title && title.length > 0) {
+      _resultant.title = this.wrap(title, widths.title);
+    }
 
-		if (args && args.length > 0) {
-			_resultant.args = this.wrap(args, widths.args - 1);
-		}
+    if (args && args.length > 0) {
+      _resultant.args = this.wrap(args, widths.args - 1);
+    }
 
-		// console.log(_resultant);
+    // console.log(_resultant);
 
-		let _text: string[] = [];
-		const max_iterations = Math.max(
-			...Object.values(_resultant).map((each) => each.length),
-		);
+    const _text: string[] = [];
+    const max_iterations = Math.max(
+      ...Object.values(_resultant).map((each) => each.length),
+    );
 
-		for (let i = 0; i < max_iterations; i++) {
-			let _temp = "";
-			for (let key of Object.keys(_resultant)) {
-				if (i < _resultant[key].length) {
-					const _plain_text = this.zfill(
-						_resultant[key][i],
-						widths[key],
-						key !== "topic",
-					);
-					if (config.colored) {
-						_temp += color[key](_plain_text);
-					} else {
-						_temp += _plain_text;
-					}
-				} else {
-					_temp += this.zfill("", widths[key]);
-				}
-			}
-			_text.push(_temp);
-		}
+    for (let i = 0; i < max_iterations; i++) {
+      let _temp = "";
+      for (const key of Object.keys(_resultant)) {
+        if (i < _resultant[key].length) {
+          const _plain_text = this.zfill(
+            _resultant[key][i],
+            widths[key],
+            key !== "topic",
+          );
+          if (config.colored) {
+            _temp += color[key](_plain_text);
+          } else {
+            _temp += _plain_text;
+          }
+        } else {
+          _temp += this.zfill("", widths[key]);
+        }
+      }
+      _text.push(_temp);
+    }
 
-		// console.log(_text.join("\n"));
+    // console.log(_text.join("\n"));
 
-		return _text.join("\n");
-	}
+    return _text.join("\n");
+  }
 }
 
 export function t(rawString: string, config: Partial<TitleConfig> = {}) {
-	return new Title(rawString).generate(config);
+  return new Title(rawString).generate(config);
 }
