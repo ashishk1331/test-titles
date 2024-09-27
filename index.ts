@@ -5,27 +5,36 @@ import chalk from "chalk";
 //   title 	white 	text
 // * args 	red 		modifier
 
+type TitleConfig = {
+	colored: boolean;
+};
+
+type Elements = "meta" | "topic" | "title" | "args";
+
+type ParsedObj = Record<Elements, string[]>;
+
 class Title {
-	config = {
+	config: TitleConfig = {
 		colored: true,
 	};
+	_obj: ParsedObj;
 
-	constructor(title) {
+	constructor(title: string) {
 		this._obj = this.parseString(title);
 	}
 
 	/**
 	 * The function accepts string and outputs {}.
 	 * */
-	parseString(string) {
-		if (typeof string !== "string") return {};
-
-		const C = {
+	parseString(string: string): ParsedObj {
+		const C: ParsedObj = {
 			meta: [],
 			topic: [],
 			title: [],
 			args: [],
 		};
+
+		if (typeof string !== "string") return C;
 
 		for (let token of string.split(" ")) {
 			const shavedToken = token.substring(1);
@@ -50,12 +59,12 @@ class Title {
 		return C;
 	}
 
-	wrap(text, width) {
+	wrap(text: string | string[], width: number) {
 		if (Array.isArray(text)) {
 			text = text.join(" ");
 		}
 
-		let _resultant = [];
+		let _resultant: string[] = [];
 		while (text.length > width) {
 			_resultant.push(text.substring(0, width).trim());
 			text = text.substring(width);
@@ -66,9 +75,9 @@ class Title {
 		return _resultant;
 	}
 
-	zfill(text, width, direction = -1) {
+	zfill(text: string, width: number, direction: boolean = true) {
 		while (text.length < width) {
-			if (direction > 0) {
+			if (direction) {
 				text += " ";
 			} else {
 				text = " " + text;
@@ -77,7 +86,7 @@ class Title {
 		return text;
 	}
 
-	updateConfig(userConfig) {
+	updateConfig(userConfig: Partial<TitleConfig>) {
 		let config = Object.create(this.config);
 		for (let key in userConfig) {
 			if (key in config) {
@@ -90,10 +99,10 @@ class Title {
 	/**
 	 * 	Function converts the captured data into a well parsed string.
 	 * */
-	generate(userConfig) {
+	generate(userConfig: Partial<TitleConfig>) {
 		const config = this.updateConfig(userConfig);
 		const { meta, topic, title, args } = this._obj;
-		let _resultant = {
+		let _resultant: ParsedObj = {
 			meta: [],
 			topic: [],
 			title: [],
@@ -132,7 +141,7 @@ class Title {
 
 		// console.log(_resultant);
 
-		let _text = [];
+		let _text: string[] = [];
 		const max_iterations = Math.max(
 			...Object.values(_resultant).map((each) => each.length),
 		);
@@ -164,6 +173,6 @@ class Title {
 	}
 }
 
-export function t(rawString, config = {}) {
+export function t(rawString: string, config: Partial<TitleConfig> = {}) {
 	return new Title(rawString).generate(config);
 }

@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "nodemon .",
-    "build": "esbuild index.js --bundle --format=esm --outfile=dist/index.mjs && esbuild index.js --bundle --format=cjs --outfile=dist/index.cjs",
+    "build": "esbuild index.ts --bundle --format=esm --outfile=dist/index.mjs && esbuild index.ts --bundle --format=cjs --outfile=dist/index.cjs",
     "test": "vitest"
   },
   "keywords": [
@@ -26,6 +26,8 @@
   "devDependencies": {
     "esbuild": "0.24.0",
     "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
     "vitest": "^2.1.1"
   },
   "dependencies": {
