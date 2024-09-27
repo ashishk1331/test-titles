@@ -2,6 +2,14 @@
   "name": "test-titles",
   "version": "0.1.0",
   "description": "Generate semantic titles for test cases.",
+  "homepage": "https://github.com/yourusername/test-titles#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishk1331/test-titles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ashishk1331/test-titles/issues"
+  },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
